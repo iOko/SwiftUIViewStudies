@@ -10,8 +10,39 @@ import SwiftUI
 
 struct ContentView : View {
     var body: some View {
-        Text("Hello World")
+        HStack(alignment: .midStarAndTitle, spacing: 20) {
+            VStack {
+                Text("✮✮✮✮✮")
+                    .alignmentGuide(.midStarAndTitle) { d -> CGFloat in
+                        d[.bottom] / 2
+                }
+                Text("5 stars")
+            }
+                .background(Color.yellow)
+                .font(.headline)
+            
+            VStack {
+                HStack(spacing: 10) {
+                    Text("Avocado Toast")
+                        .alignmentGuide(.midStarAndTitle) { d -> CGFloat in
+                            let x =
+                            d[.bottom] / 2
+                            return x
+                    }
+                    Spacer()
+                    Text("🥑")
+
+                }
+                Text("Ingredients: Avocado, Almond Butter, Bread, Red Pepper")
+                
+            }
+                .background(Color.orange)
+                .font(.subheadline)
+            
+        }
+            .padding()
     }
+    
 }
 
 #if DEBUG
@@ -21,3 +52,13 @@ struct ContentView_Previews : PreviewProvider {
     }
 }
 #endif
+
+
+extension VerticalAlignment {
+    private enum MidStarAndTitle : AlignmentID {
+        static func defaultValue(in context: ViewDimensions) -> CGFloat {
+            context[.bottom]
+        }
+    }
+    static let midStarAndTitle = VerticalAlignment(MidStarAndTitle.self)
+}
